@@ -10,7 +10,7 @@ function getSampleData(subject) {
   
       //add filter data to the panel
       Object.entries(filterData[0]).forEach(([k, v]) => {
-        dataSelect.append("h6").text(`${k.toUpperCase()}: ${v}`);
+        dataSelect.append("h5").text(`${k}: ${v}`);
       });
     });
 }
@@ -61,7 +61,6 @@ function getPlot(subject) {
       //use plotly to make the bar chart
       Plotly.newPlot("bar", data2, layout2);
 
-
     });
 }
 
@@ -91,3 +90,4 @@ function optionChanged(subject) {
 
   //call initialize for app
 init();
+
