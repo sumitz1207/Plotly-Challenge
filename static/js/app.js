@@ -1,3 +1,20 @@
+function getSampleData(subject) {
+    d3.json("samples.json").then((data) => {
+      var metadata = data.metadata;
+      //filter given the parameter subject's id
+      var filterData = metadata.filter(filterItem => filterItem.id == subject);
+      // use d3 select `#sample-metadata`
+      var dataSelect = d3.select("#sample-metadata");
+      //clear metadata
+      dataSelect.html("");
+  
+      //add filter data to the panel
+      Object.entries(filterData[0]).forEach(([k, v]) => {
+        dataSelect.append("h6").text(`${k.toUpperCase()}: ${v}`);
+      });
+    });
+  }
+
 //initialize function for plotly app
   function init() {
     //refer to drop down data selector
@@ -11,8 +28,8 @@
       names.forEach((listItem) => {dropSelect.append("option").text(listItem).property("value", listItem);
       });
       //take from the list and call the functions to build graphs and data
-      buildCharts(names[0]);
-      buildMetadata(names[0]);
+      getPlots(names[0]);
+      getSampleData(names[0]);
     });
   }
 
